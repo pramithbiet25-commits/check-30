@@ -1,4 +1,7 @@
 /* --- CONFIGURATION --- */
+// TARGET DATE: November 30, 2025
+const targetDate = new Date("November 30, 2025 00:00:00").getTime();
+
 // Questions Data
 const quizData = [
     { q: "When did our journey begin?", o: ["Jan 1, 2025", "Feb 14, 2025", "Feb 18, 2025", "March 1, 2025"], a: 2 },
@@ -14,7 +17,7 @@ const quizData = [
     { q: "Will you marry me?", o: ["Yes!", "Of course!", "Definetly Yes!", "Forever Yes!"], a: [0,1,2,3] } 
 ];
 
-// Photo Data 
+// Photo Data (Flat paths)
 const photoData = [
     { src: "photo1.jpg", cap: "My Princess" },
     { src: "photo2.jpg", cap: "The Beginning" },
@@ -47,10 +50,45 @@ Forever Yours,
 Param ✨`;
 
 /* --- APP LOGIC --- */
-let currentView = 'view-intro'; // Start directly at Intro
+let currentView = 'view-countdown';
 let quizIndex = 0;
 let photoIndex = 0;
 const bgMusic = document.getElementById('bg-music');
+
+// Attempt to play music immediately, but respect browser rules
+// The first time the user clicks ANYWHERE on the page, music starts.
+document.body.addEventListener('click', function() {
+    if (bgMusic.paused) {
+        bgMusic.play();
+    }
+}, { once: true }); // Runs only once
+
+function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+
+    if (distance < 0) {
+        if (currentView === 'view-countdown') {
+            document.getElementById('view-countdown').classList.remove('active');
+            document.getElementById('view-intro').classList.add('active');
+            currentView = 'view-intro';
+        }
+        return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("d").innerText = String(days).padStart(2, '0');
+    document.getElementById("h").innerText = String(hours).padStart(2, '0');
+    document.getElementById("m").innerText = String(minutes).padStart(2, '0');
+    document.getElementById("s").innerText = String(seconds).padStart(2, '0');
+    
+    requestAnimationFrame(updateCountdown);
+}
+updateCountdown();
 
 function startHeartRain() {
     const container = document.getElementById('heart-rain');
@@ -78,15 +116,6 @@ function switchView(id) {
 }
 
 function startJourney() {
-    // FORCE MUSIC PLAY
-    bgMusic.volume = 1.0; // Ensure volume is up
-    bgMusic.play().then(() => {
-        console.log("Music playing!");
-    }).catch(error => {
-        console.log("Auto-play blocked: " + error);
-    });
-    
-    document.getElementById('sound-btn').style.opacity = 1;
     loadQuestion();
     switchView('view-quiz');
 }
@@ -140,20 +169,17 @@ function goToGallery() {
     switchView('view-photos');
 }
 
-// --- FIXED PHOTO STACK LOGIC ---
+// --- PHOTO STACK LOGIC ---
 function initPhotoStack() {
     const container = document.getElementById('stack-container');
     container.innerHTML = '';
     
-    // We iterate normally: Photo 1 (index 0) gets created first.
+    // Stack photo 1 on top (highest Z-index)
     photoData.forEach((photo, i) => {
         const card = document.createElement('div');
         card.className = 'stack-item';
         card.id = `photo-${i}`;
         
-        // IMPORTANT: This line puts Photo 1 ON TOP
-        // i=0 (Photo1) -> zIndex=10
-        // i=9 (Photo10) -> zIndex=1
         card.style.zIndex = photoData.length - i; 
         
         const rot = (Math.random() * 10) - 5;
@@ -168,29 +194,19 @@ function initPhotoStack() {
 }
 
 function nextPhoto() {
-    // If we still have photos to show
     if (photoIndex < photoData.length) {
-        // Get the current top photo
         const card = document.getElementById(`photo-${photoIndex}`);
-        if (card) {
-            // Make it fly away, revealing the one underneath
-            card.classList.add('fly-away');
-        }
+        if (card) card.classList.add('fly-away');
         photoIndex++;
         updateCounter();
     }
 }
 
 function prevPhoto() {
-    // If we are not at the start
     if (photoIndex > 0) {
         photoIndex--;
-        // Get the photo that just flew away
         const card = document.getElementById(`photo-${photoIndex}`);
-        if (card) {
-            // Bring it back
-            card.classList.remove('fly-away');
-        }
+        if (card) card.classList.remove('fly-away');
         updateCounter();
     }
 }
