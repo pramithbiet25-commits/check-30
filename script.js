@@ -78,7 +78,14 @@ function switchView(id) {
 }
 
 function startJourney() {
-    bgMusic.play().catch(() => console.log("Audio blocked"));
+    // FORCE MUSIC PLAY
+    bgMusic.volume = 1.0; // Ensure volume is up
+    bgMusic.play().then(() => {
+        console.log("Music playing!");
+    }).catch(error => {
+        console.log("Auto-play blocked: " + error);
+    });
+    
     document.getElementById('sound-btn').style.opacity = 1;
     loadQuestion();
     switchView('view-quiz');
@@ -138,14 +145,15 @@ function initPhotoStack() {
     const container = document.getElementById('stack-container');
     container.innerHTML = '';
     
-    // Loop through photos naturally (No Reverse)
+    // We iterate normally: Photo 1 (index 0) gets created first.
     photoData.forEach((photo, i) => {
         const card = document.createElement('div');
         card.className = 'stack-item';
-        card.id = `photo-${i}`; // ID matches the index (0, 1, 2...)
+        card.id = `photo-${i}`;
         
-        // THIS IS THE FIX:
-        // We give the first photo (i=0) the HIGHEST z-index so it sits on top.
+        // IMPORTANT: This line puts Photo 1 ON TOP
+        // i=0 (Photo1) -> zIndex=10
+        // i=9 (Photo10) -> zIndex=1
         card.style.zIndex = photoData.length - i; 
         
         const rot = (Math.random() * 10) - 5;
@@ -160,20 +168,29 @@ function initPhotoStack() {
 }
 
 function nextPhoto() {
-    // When we click next, we take the TOP card (current index) and fly it away
+    // If we still have photos to show
     if (photoIndex < photoData.length) {
+        // Get the current top photo
         const card = document.getElementById(`photo-${photoIndex}`);
-        if (card) card.classList.add('fly-away');
+        if (card) {
+            // Make it fly away, revealing the one underneath
+            card.classList.add('fly-away');
+        }
         photoIndex++;
         updateCounter();
     }
 }
 
 function prevPhoto() {
+    // If we are not at the start
     if (photoIndex > 0) {
         photoIndex--;
+        // Get the photo that just flew away
         const card = document.getElementById(`photo-${photoIndex}`);
-        if (card) card.classList.remove('fly-away');
+        if (card) {
+            // Bring it back
+            card.classList.remove('fly-away');
+        }
         updateCounter();
     }
 }
