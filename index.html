@@ -4,46 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>For You, Always</title>
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-    
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <audio id="bg-music" loop autoplay>
         <source src="your-music.mp3" type="audio/mpeg">
     </audio>
-    
     <div class="sound-control" id="sound-btn" style="opacity: 1;">
         <span class="sound-icon">♪</span>
     </div>
-
     <div class="overlay-noise"></div>
     <div class="overlay-vignette"></div>
     <div class="heart-rain" id="heart-rain"></div>
 
-    <section id="view-countdown" class="view active">
-        <div class="content-box">
-            <p class="intro-date">The big day is coming ...</p>
-            <div class="timer-container">
-                <div class="time-box"><span id="d" class="time-num">00</span><span class="time-label">Days</span></div>
-                <div class="separator">:</div>
-                <div class="time-box"><span id="h" class="time-num">00</span><span class="time-label">Hours</span></div>
-                <div class="separator">:</div>
-                <div class="time-box"><span id="m" class="time-num">00</span><span class="time-label">Mins</span></div>
-                <div class="separator">:</div>
-                <div class="time-box"><span id="s" class="time-num">00</span><span class="time-label">Secs</span></div>
-            </div>
-            <p class="subtitle-hero" style="margin-top: 30px; font-size: 1.5rem;">Wait for it ✨</p>
-        </div>
-    </section>
-
-    <section id="view-intro" class="view">
+    <section id="view-intro" class="view active">
         <div class="content-box floating-anim">
             <p class="intro-date">Cheers to 16 🥂</p>
             <h1 class="title-hero">Happy Birthday</h1>
@@ -89,7 +67,6 @@
             <button class="btn-text" style="margin-top: 25px; color: black;" onclick="showLetter()">Read Letter Again 💌</button>
         </div>
     </section>
-
     <script src="script.js"></script>
 </body>
 </html>
