@@ -1,8 +1,4 @@
 /* --- CONFIGURATION --- */
-// TARGET DATE: November 30, 2025
-const targetDate = new Date("November 30, 2025 00:00:00").getTime();
-
-// Questions Data
 const quizData = [
     { q: "When did our journey begin?", o: ["Jan 1, 2025", "Feb 14, 2025", "Feb 18, 2025", "March 1, 2025"], a: 2 },
     { q: "Where did we first meet?", o: ["A Coffee Shop", "Sapna Book House", "A Park", "College"], a: 1 },
@@ -17,7 +13,6 @@ const quizData = [
     { q: "Will you marry me?", o: ["Yes!", "Of course!", "Definetly Yes!", "Forever Yes!"], a: [0,1,2,3] } 
 ];
 
-// Photo Data (Flat paths)
 const photoData = [
     { src: "photo1.jpg", cap: "My Princess" },
     { src: "photo2.jpg", cap: "The Beginning" },
@@ -50,45 +45,15 @@ Forever Yours,
 Param ✨`;
 
 /* --- APP LOGIC --- */
-let currentView = 'view-countdown';
+let currentView = 'view-intro'; // Start directly at Intro
 let quizIndex = 0;
 let photoIndex = 0;
 const bgMusic = document.getElementById('bg-music');
 
-// Attempt to play music immediately, but respect browser rules
-// The first time the user clicks ANYWHERE on the page, music starts.
+// AUTO PLAY ON FIRST CLICK
 document.body.addEventListener('click', function() {
-    if (bgMusic.paused) {
-        bgMusic.play();
-    }
-}, { once: true }); // Runs only once
-
-function updateCountdown() {
-    const now = new Date().getTime();
-    const distance = targetDate - now;
-
-    if (distance < 0) {
-        if (currentView === 'view-countdown') {
-            document.getElementById('view-countdown').classList.remove('active');
-            document.getElementById('view-intro').classList.add('active');
-            currentView = 'view-intro';
-        }
-        return;
-    }
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    document.getElementById("d").innerText = String(days).padStart(2, '0');
-    document.getElementById("h").innerText = String(hours).padStart(2, '0');
-    document.getElementById("m").innerText = String(minutes).padStart(2, '0');
-    document.getElementById("s").innerText = String(seconds).padStart(2, '0');
-    
-    requestAnimationFrame(updateCountdown);
-}
-updateCountdown();
+    if (bgMusic.paused) { bgMusic.play(); }
+}, { once: true });
 
 function startHeartRain() {
     const container = document.getElementById('heart-rain');
@@ -137,11 +102,9 @@ function loadQuestion() {
 function handleAnswer(btn, selectedIndex, correctData) {
     const allBtns = document.querySelectorAll('.opt-btn');
     allBtns.forEach(b => b.disabled = true);
-    
     let isCorrect = false;
     if (Array.isArray(correctData)) { isCorrect = true; }
     else if (selectedIndex === correctData) { isCorrect = true; }
-
     if (isCorrect) {
         btn.classList.add('correct');
         confetti({ particleCount: 50, spread: 60, colors: ['#d4a5a5', '#fff'], gravity: 0.4 });
@@ -168,31 +131,22 @@ function goToGallery() {
     initPhotoStack();
     switchView('view-photos');
 }
-
-// --- PHOTO STACK LOGIC ---
 function initPhotoStack() {
     const container = document.getElementById('stack-container');
     container.innerHTML = '';
-    
-    // Stack photo 1 on top (highest Z-index)
     photoData.forEach((photo, i) => {
         const card = document.createElement('div');
         card.className = 'stack-item';
         card.id = `photo-${i}`;
-        
         card.style.zIndex = photoData.length - i; 
-        
         const rot = (Math.random() * 10) - 5;
         card.style.transform = `rotate(${rot}deg)`;
-        
         card.innerHTML = `<img src="${photo.src}" alt="Memory"><div class="stack-caption">${photo.cap}</div>`;
         container.appendChild(card);
     });
-    
     photoIndex = 0;
     updateCounter();
 }
-
 function nextPhoto() {
     if (photoIndex < photoData.length) {
         const card = document.getElementById(`photo-${photoIndex}`);
@@ -201,7 +155,6 @@ function nextPhoto() {
         updateCounter();
     }
 }
-
 function prevPhoto() {
     if (photoIndex > 0) {
         photoIndex--;
@@ -210,13 +163,11 @@ function prevPhoto() {
         updateCounter();
     }
 }
-
 function updateCounter() {
     let display = photoIndex + 1;
     if (display > photoData.length) display = photoData.length;
     document.getElementById('counter').innerText = `${display} / ${photoData.length}`;
 }
-
 document.getElementById('sound-btn').addEventListener('click', function() {
     if (bgMusic.paused) { bgMusic.play(); this.style.opacity = 1; }
     else { bgMusic.pause(); this.style.opacity = 0.5; }
