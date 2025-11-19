@@ -14,21 +14,20 @@ const quizData = [
     { q: "Will you marry me?", o: ["Yes!", "Of course!", "Definetly Yes!", "Forever Yes!"], a: [0,1,2,3] } 
 ];
 
-// Photo Gallery Data
+// Photo Data (Flat paths, no 'images/')
 const photoData = [
-    { src: "images/photo1.jpg", cap: "The Beginning" },
-    { src: "images/photo2.jpg", cap: "Pure Happiness" },
-    { src: "images/photo3.jpg", cap: "Adventures" },
-    { src: "images/photo4.jpg", cap: "Us" },
-    { src: "images/photo5.jpg", cap: "Date Night" },
-    { src: "images/photo6.jpg", cap: "Silly Moments" },
-    { src: "images/photo7.jpg", cap: "Your Smile" },
-    { src: "images/photo8.jpg", cap: "My Favorite View" },
-    { src: "images/photo9.jpg", cap: "Best Friends" },
-    { src: "images/photo10.jpg", cap: "Forever" }
+    { src: "photo1.jpg", cap: "My Princess" },
+    { src: "photo2.jpg", cap: "The Beginning" },
+    { src: "photo3.jpg", cap: "Gorgeous" },
+    { src: "photo4.jpg", cap: "Your Smile" },
+    { src: "photo5.jpg", cap: "Date Eve" },
+    { src: "photo6.jpg", cap: "Saree Moments" },
+    { src: "photo7.jpg", cap: "Radhe Radhe" },
+    { src: "photo8.jpg", cap: "Princess" },
+    { src: "photo9.jpg", cap: "Spicy 🔥" },
+    { src: "photo10.jpg", cap: "Forever" }
 ];
 
-// Letter Content
 const letterText = `Boo Boo,
 Happy Birthday 🌻
 
@@ -48,12 +47,11 @@ Forever Yours,
 Param ✨`;
 
 /* --- APP LOGIC --- */
-let currentView = 'view-intro';
+let currentView = 'view-intro'; // Start directly at Intro
 let quizIndex = 0;
 let photoIndex = 0;
 const bgMusic = document.getElementById('bg-music');
 
-// --- HEART RAIN ANIMATION ---
 function startHeartRain() {
     const container = document.getElementById('heart-rain');
     setInterval(() => {
@@ -71,7 +69,6 @@ function startHeartRain() {
 }
 startHeartRain();
 
-// --- NAVIGATION ---
 function switchView(id) {
     document.getElementById(currentView).classList.remove('active');
     setTimeout(() => {
@@ -87,7 +84,6 @@ function startJourney() {
     switchView('view-quiz');
 }
 
-// --- QUIZ LOGIC ---
 function loadQuestion() {
     const data = quizData[quizIndex];
     document.getElementById('q-text').innerText = data.q;
@@ -128,7 +124,6 @@ function handleAnswer(btn, selectedIndex, correctData) {
     }
 }
 
-// --- LETTER & GALLERY LOGIC ---
 function showLetter() {
     document.getElementById('letter-content').innerHTML = letterText;
     switchView('view-letter');
