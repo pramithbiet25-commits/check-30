@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Check</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>For You, Always</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <audio id="bg-music" loop>
+        <source src="your-music.mp3" type="audio/mpeg">
+    </audio>
+    
+    <div class="sound-control" id="sound-btn">
+        <span class="sound-icon">♪</span>
+    </div>
+
+    <div class="overlay-noise"></div>
+    <div class="overlay-vignette"></div>
+    <div class="heart-rain" id="heart-rain"></div>
+
+    <section id="view-intro" class="view active">
+        <div class="content-box floating-anim">
+            <p class="intro-date">Cheers to 16 🥂</p>
+            <h1 class="title-hero">Happy Birthday</h1>
+            <p class="subtitle-hero">A surprise with love!</p>
+            <button class="btn-romance pulse-anim" onclick="startJourney()">Open Your Gift ✨</button>
+        </div>
+    </section>
+
+    <section id="view-quiz" class="view">
+        <div class="quiz-container">
+            <span class="chapter-mark">Love Quiz 🌻</span>
+            <h2 class="quiz-title">Do you remember?</h2>
+            
+            <div class="question-card">
+                <p id="q-text" class="q-text">Loading...</p>
+                <div class="options-stack" id="opt-grid"></div>
+            </div>
+            <p id="feedback" class="feedback-text"></p>
+        </div>
+    </section>
+
+    <section id="view-letter" class="view">
+        <div class="letter-wrapper">
+            <span class="chapter-mark" style="color: black; font-weight: 600;">A Letter For You 🌻</span>
+            
+            <div class="letter-paper floating-anim">
+                <div class="stamp-photo">
+                    <img src="images/final-photo.jpg" alt="Us">
+                </div>
+                <div class="letter-content" id="letter-content"></div>
+            </div>
+            
+            <button class="btn-text" style="color: black;" onclick="goToGallery()">See My Favourites &rarr;</button>
+        </div>
+    </section>
+
+    <section id="view-photos" class="view">
+        <div class="gallery-wrapper">
+            <span class="chapter-mark" style="color: black;">My Favourites 🌻</span>
+            
+            <div class="polaroid-stack" id="stack-container"></div>
+
+            <div class="gallery-nav">
+                <button class="nav-circle" onclick="prevPhoto()">←</button>
+                <span id="counter">1 / 10</span>
+                <button class="nav-circle" onclick="nextPhoto()">→</button>
+            </div>
+
+            <button class="btn-text" style="margin-top: 25px; color: black;" onclick="showLetter()">Read Letter Again 💌</button>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
+    <script  src="./script.js"></script>
+
+  </body>
+  
+</html>
