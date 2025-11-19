@@ -45,16 +45,12 @@ Forever Yours,
 Param ✨`;
 
 /* --- APP LOGIC --- */
-let currentView = 'view-intro'; // Start directly at Intro
+let currentView = 'view-intro'; 
 let quizIndex = 0;
 let photoIndex = 0;
 const bgMusic = document.getElementById('bg-music');
 
-// AUTO PLAY ON FIRST CLICK
-document.body.addEventListener('click', function() {
-    if (bgMusic.paused) { bgMusic.play(); }
-}, { once: true });
-
+// 1. HEART RAIN
 function startHeartRain() {
     const container = document.getElementById('heart-rain');
     setInterval(() => {
@@ -72,6 +68,7 @@ function startHeartRain() {
 }
 startHeartRain();
 
+// 2. NAVIGATION
 function switchView(id) {
     document.getElementById(currentView).classList.remove('active');
     setTimeout(() => {
@@ -80,11 +77,20 @@ function switchView(id) {
     }, 800);
 }
 
+// 3. START JOURNEY (Triggered by Button)
 function startJourney() {
+    // Try to play music
+    if (bgMusic.paused) { 
+        bgMusic.play().catch(e => console.log("Audio wait")); 
+    }
+    document.getElementById('sound-btn').style.opacity = 1;
+    
+    // Load Quiz
     loadQuestion();
     switchView('view-quiz');
 }
 
+// 4. QUIZ LOGIC
 function loadQuestion() {
     const data = quizData[quizIndex];
     document.getElementById('q-text').innerText = data.q;
@@ -102,9 +108,11 @@ function loadQuestion() {
 function handleAnswer(btn, selectedIndex, correctData) {
     const allBtns = document.querySelectorAll('.opt-btn');
     allBtns.forEach(b => b.disabled = true);
+    
     let isCorrect = false;
     if (Array.isArray(correctData)) { isCorrect = true; }
     else if (selectedIndex === correctData) { isCorrect = true; }
+
     if (isCorrect) {
         btn.classList.add('correct');
         confetti({ particleCount: 50, spread: 60, colors: ['#d4a5a5', '#fff'], gravity: 0.4 });
@@ -123,6 +131,7 @@ function handleAnswer(btn, selectedIndex, correctData) {
     }
 }
 
+// 5. LETTER & GALLERY
 function showLetter() {
     document.getElementById('letter-content').innerHTML = letterText;
     switchView('view-letter');
@@ -131,6 +140,8 @@ function goToGallery() {
     initPhotoStack();
     switchView('view-photos');
 }
+
+// 6. PHOTO STACK
 function initPhotoStack() {
     const container = document.getElementById('stack-container');
     container.innerHTML = '';
