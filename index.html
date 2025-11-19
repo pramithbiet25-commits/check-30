@@ -15,11 +15,11 @@
 </head>
 <body>
 
-    <audio id="bg-music" loop>
+    <audio id="bg-music" loop autoplay>
         <source src="your-music.mp3" type="audio/mpeg">
     </audio>
     
-    <div class="sound-control" id="sound-btn">
+    <div class="sound-control" id="sound-btn" style="opacity: 1;">
         <span class="sound-icon">♪</span>
     </div>
 
@@ -27,7 +27,23 @@
     <div class="overlay-vignette"></div>
     <div class="heart-rain" id="heart-rain"></div>
 
-    <section id="view-intro" class="view active">
+    <section id="view-countdown" class="view active">
+        <div class="content-box">
+            <p class="intro-date">The big day is coming ...</p>
+            <div class="timer-container">
+                <div class="time-box"><span id="d" class="time-num">00</span><span class="time-label">Days</span></div>
+                <div class="separator">:</div>
+                <div class="time-box"><span id="h" class="time-num">00</span><span class="time-label">Hours</span></div>
+                <div class="separator">:</div>
+                <div class="time-box"><span id="m" class="time-num">00</span><span class="time-label">Mins</span></div>
+                <div class="separator">:</div>
+                <div class="time-box"><span id="s" class="time-num">00</span><span class="time-label">Secs</span></div>
+            </div>
+            <p class="subtitle-hero" style="margin-top: 30px; font-size: 1.5rem;">Wait for it ✨</p>
+        </div>
+    </section>
+
+    <section id="view-intro" class="view">
         <div class="content-box floating-anim">
             <p class="intro-date">Cheers to 16 🥂</p>
             <h1 class="title-hero">Happy Birthday</h1>
@@ -40,7 +56,6 @@
         <div class="quiz-container">
             <span class="chapter-mark">Love Quiz 🌻</span>
             <h2 class="quiz-title">Do you remember?</h2>
-            
             <div class="question-card">
                 <p id="q-text" class="q-text">Loading...</p>
                 <div class="options-stack" id="opt-grid"></div>
@@ -52,14 +67,12 @@
     <section id="view-letter" class="view">
         <div class="letter-wrapper">
             <span class="chapter-mark" style="color: black; font-weight: 600;">A Letter For You 🌻</span>
-            
             <div class="letter-paper floating-anim">
                 <div class="stamp-photo">
                     <img src="final-photo.jpg" alt="Us">
                 </div>
                 <div class="letter-content" id="letter-content"></div>
             </div>
-            
             <button class="btn-text" style="color: black;" onclick="goToGallery()">See My Favourites &rarr;</button>
         </div>
     </section>
@@ -67,15 +80,12 @@
     <section id="view-photos" class="view">
         <div class="gallery-wrapper">
             <span class="chapter-mark" style="color: black;">My Favourites 🌻</span>
-            
             <div class="polaroid-stack" id="stack-container"></div>
-
             <div class="gallery-nav">
                 <button class="nav-circle" onclick="prevPhoto()">←</button>
                 <span id="counter">1 / 10</span>
                 <button class="nav-circle" onclick="nextPhoto()">→</button>
             </div>
-
             <button class="btn-text" style="margin-top: 25px; color: black;" onclick="showLetter()">Read Letter Again 💌</button>
         </div>
     </section>
