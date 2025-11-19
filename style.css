@@ -32,7 +32,7 @@ body {
     pointer-events: none; z-index: 2;
 }
 
-/* HEART RAIN - Fixed Z-Index to ensure it shows */
+/* HEART RAIN */
 .heart-rain { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; overflow: hidden; }
 .falling-heart {
     position: absolute; top: -10%;
@@ -56,7 +56,6 @@ body {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     opacity: 0; pointer-events: none; transition: opacity 1.2s ease, transform 1.2s ease;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    /* Increased Z-index to sit above rain, but background is transparent */
     z-index: 10; padding: 30px;
 }
 .view.active { opacity: 1; pointer-events: all; }
@@ -74,6 +73,16 @@ body {
     max-width: 500px;
     width: 100%;
 }
+
+/* --- COUNTDOWN STYLES --- */
+.timer-container {
+    display: flex; align-items: center; justify-content: center; gap: 15px;
+    margin-top: 20px;
+}
+.time-box { display: flex; flex-direction: column; align-items: center; }
+.time-num { font-family: var(--font-display); font-size: 3rem; line-height: 1; color: black; }
+.time-label { font-family: var(--font-body); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: #888; margin-top: 5px; }
+.separator { font-size: 2rem; margin-top: -20px; color: #ccc; }
 
 /* --- TYPOGRAPHY & UI --- */
 .intro-date { 
@@ -116,7 +125,8 @@ body {
 
 /* --- LETTER --- */
 .letter-wrapper { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-/* FIXED: Removed solid background color here so rain shows through */
+/* Semi-transparent background */
+#view-letter { background-color: rgba(255, 240, 245, 0.85); } 
 
 .letter-paper {
     background: #fff; padding: 40px; width: 100%; max-width: 600px; height: 75vh;
@@ -159,5 +169,5 @@ body {
 .nav-circle:hover { border-color: black; color: black; }
 #counter { font-family: var(--font-body); font-size: 0.8rem; letter-spacing: 2px; color: black; }
 
-.sound-control { position: absolute; top: 30px; right: 30px; z-index: 50; opacity: 0.5; cursor: pointer; transition: opacity 0.3s; }
+.sound-control { position: absolute; top: 30px; right: 30px; z-index: 50; opacity: 1; cursor: pointer; transition: opacity 0.3s; }
 .sound-control:hover { opacity: 1; }
