@@ -1,16 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
-  <head>
-    <meta charset="UTF-8">
-    <title>Check</title>
-    <link rel="stylesheet" href="./style.css">
-
-  </head>
-    
-  <body>
-  <!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -51,7 +40,6 @@
         <div class="quiz-container">
             <span class="chapter-mark">Love Quiz 🌻</span>
             <h2 class="quiz-title">Do you remember?</h2>
-            
             <div class="question-card">
                 <p id="q-text" class="q-text">Loading...</p>
                 <div class="options-stack" id="opt-grid"></div>
@@ -63,14 +51,12 @@
     <section id="view-letter" class="view">
         <div class="letter-wrapper">
             <span class="chapter-mark" style="color: black; font-weight: 600;">A Letter For You 🌻</span>
-            
             <div class="letter-paper floating-anim">
                 <div class="stamp-photo">
-                    <img src="images/final-photo.jpg" alt="Us">
+                    <img src="final-photo.jpg" alt="Us">
                 </div>
                 <div class="letter-content" id="letter-content"></div>
             </div>
-            
             <button class="btn-text" style="color: black;" onclick="goToGallery()">See My Favourites &rarr;</button>
         </div>
     </section>
@@ -78,24 +64,16 @@
     <section id="view-photos" class="view">
         <div class="gallery-wrapper">
             <span class="chapter-mark" style="color: black;">My Favourites 🌻</span>
-            
             <div class="polaroid-stack" id="stack-container"></div>
-
             <div class="gallery-nav">
                 <button class="nav-circle" onclick="prevPhoto()">←</button>
                 <span id="counter">1 / 10</span>
                 <button class="nav-circle" onclick="nextPhoto()">→</button>
             </div>
-
             <button class="btn-text" style="margin-top: 25px; color: black;" onclick="showLetter()">Read Letter Again 💌</button>
         </div>
     </section>
 
     <script src="script.js"></script>
 </body>
-</html>
-    <script  src="./script.js"></script>
-
-  </body>
-  
 </html>
