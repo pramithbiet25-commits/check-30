@@ -14,7 +14,7 @@ const quizData = [
     { q: "Will you marry me?", o: ["Yes!", "Of course!", "Definetly Yes!", "Forever Yes!"], a: [0,1,2,3] } 
 ];
 
-// Photo Data (Flat paths, no 'images/')
+// Photo Data 
 const photoData = [
     { src: "photo1.jpg", cap: "My Princess" },
     { src: "photo2.jpg", cap: "The Beginning" },
@@ -132,24 +132,35 @@ function goToGallery() {
     initPhotoStack();
     switchView('view-photos');
 }
+
+// --- FIXED PHOTO STACK LOGIC ---
 function initPhotoStack() {
     const container = document.getElementById('stack-container');
     container.innerHTML = '';
-    photoData.slice().reverse().forEach((photo, i) => {
-        const realIndex = photoData.length - 1 - i;
+    
+    // Loop through photos naturally (No Reverse)
+    photoData.forEach((photo, i) => {
         const card = document.createElement('div');
         card.className = 'stack-item';
-        card.id = `photo-${realIndex}`;
-        card.style.zIndex = realIndex + 10;
+        card.id = `photo-${i}`; // ID matches the index (0, 1, 2...)
+        
+        // THIS IS THE FIX:
+        // We give the first photo (i=0) the HIGHEST z-index so it sits on top.
+        card.style.zIndex = photoData.length - i; 
+        
         const rot = (Math.random() * 10) - 5;
         card.style.transform = `rotate(${rot}deg)`;
+        
         card.innerHTML = `<img src="${photo.src}" alt="Memory"><div class="stack-caption">${photo.cap}</div>`;
         container.appendChild(card);
     });
+    
     photoIndex = 0;
     updateCounter();
 }
+
 function nextPhoto() {
+    // When we click next, we take the TOP card (current index) and fly it away
     if (photoIndex < photoData.length) {
         const card = document.getElementById(`photo-${photoIndex}`);
         if (card) card.classList.add('fly-away');
@@ -157,6 +168,7 @@ function nextPhoto() {
         updateCounter();
     }
 }
+
 function prevPhoto() {
     if (photoIndex > 0) {
         photoIndex--;
@@ -165,11 +177,13 @@ function prevPhoto() {
         updateCounter();
     }
 }
+
 function updateCounter() {
     let display = photoIndex + 1;
     if (display > photoData.length) display = photoData.length;
     document.getElementById('counter').innerText = `${display} / ${photoData.length}`;
 }
+
 document.getElementById('sound-btn').addEventListener('click', function() {
     if (bgMusic.paused) { bgMusic.play(); this.style.opacity = 1; }
     else { bgMusic.pause(); this.style.opacity = 0.5; }
