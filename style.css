@@ -9,9 +9,7 @@
     --font-script: 'Pinyon Script', cursive;
     --font-body: 'Lato', sans-serif;
 }
-
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
 body {
     margin: 0;
     background-color: var(--bg-paper);
@@ -19,8 +17,6 @@ body {
     font-family: var(--font-display);
     height: 100vh; width: 100vw; overflow: hidden;
 }
-
-/* --- ANIMATION LAYERS --- */
 .overlay-noise {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background-image: url("https://www.transparenttextures.com/patterns/stardust.png");
@@ -31,8 +27,6 @@ body {
     background: radial-gradient(circle, transparent 60%, rgba(0,0,0,0.1) 100%);
     pointer-events: none; z-index: 2;
 }
-
-/* HEART RAIN */
 .heart-rain { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; overflow: hidden; }
 .falling-heart {
     position: absolute; top: -10%;
@@ -43,15 +37,10 @@ body {
     0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
     100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
 }
-
-/* FLOATING & PULSE ANIMATIONS */
 .floating-anim { animation: float 6s ease-in-out infinite; }
 @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-
 .pulse-anim { animation: pulse 2s infinite; }
 @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
-
-/* --- VIEW TRANSITIONS --- */
 .view {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     opacity: 0; pointer-events: none; transition: opacity 1.2s ease, transform 1.2s ease;
@@ -59,8 +48,6 @@ body {
     z-index: 10; padding: 30px;
 }
 .view.active { opacity: 1; pointer-events: all; }
-
-/* --- TRANSLUCENT BOX STYLE --- */
 .content-box {
     background: rgba(255, 255, 255, 0.65);
     backdrop-filter: blur(12px);
@@ -73,8 +60,6 @@ body {
     max-width: 500px;
     width: 100%;
 }
-
-/* --- COUNTDOWN STYLES --- */
 .timer-container {
     display: flex; align-items: center; justify-content: center; gap: 15px;
     margin-top: 20px;
@@ -83,8 +68,6 @@ body {
 .time-num { font-family: var(--font-display); font-size: 3rem; line-height: 1; color: black; }
 .time-label { font-family: var(--font-body); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: #888; margin-top: 5px; }
 .separator { font-size: 2rem; margin-top: -20px; color: #ccc; }
-
-/* --- TYPOGRAPHY & UI --- */
 .intro-date { 
     font-family: var(--font-body); letter-spacing: 3px; text-transform: uppercase; 
     font-size: 0.7rem; color: black; margin-bottom: 5px; 
@@ -96,22 +79,17 @@ body {
 .subtitle-hero { 
     font-family: var(--font-script); font-size: 2rem; color: black; margin-top: 10px; 
 }
-
 .btn-romance {
     margin-top: 40px; background: transparent; border: 1px solid black;
     padding: 15px 50px; font-family: var(--font-body); letter-spacing: 2px; text-transform: uppercase;
     font-size: 0.8rem; cursor: pointer; transition: all 0.5s; color: black;
 }
 .btn-romance:hover { background: black; color: white; border-color: black; }
-
-/* --- QUIZ --- */
 .quiz-container { width: 100%; max-width: 500px; text-align: center; }
 .chapter-mark { font-family: var(--font-body); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 10px; }
 .quiz-title { font-family: var(--font-script); font-size: 2.8rem; color: black; margin: 0 0 30px 0; }
-
 .question-card { background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); padding: 30px; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 10px 40px rgba(0,0,0,0.05); border-radius: 2px; }
 .q-text { font-size: 1.5rem; line-height: 1.3; margin-bottom: 25px; color: black; }
-
 .options-stack { display: flex; flex-direction: column; gap: 12px; }
 .opt-btn {
     background: transparent; border: none; border-bottom: 1px solid #e0e0e0; padding: 15px 0;
@@ -120,33 +98,22 @@ body {
 }
 .opt-btn:hover { color: black; border-color: black; letter-spacing: 1px; }
 .opt-btn.correct { color: black; border-color: black; font-weight: bold; }
-
 .feedback-text { height: 20px; margin-top: 20px; font-family: var(--font-script); font-size: 1.5rem; color: black; }
-
-/* --- LETTER --- */
 .letter-wrapper { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-/* Semi-transparent background */
 #view-letter { background-color: rgba(255, 240, 245, 0.85); } 
-
 .letter-paper {
     background: #fff; padding: 40px; width: 100%; max-width: 600px; height: 75vh;
     box-shadow: 0 20px 60px rgba(0,0,0,0.1); overflow-y: auto; position: relative;
     border: 1px solid #fff; scrollbar-width: none; 
 }
 .letter-paper::-webkit-scrollbar { display: none; }
-
 .stamp-photo { width: 90px; height: 90px; margin: 0 auto 30px; border-radius: 50%; overflow: hidden; border: 1px solid var(--rose-gold); opacity: 0.9; }
 .stamp-photo img { width: 100%; height: 100%; object-fit: cover; filter: sepia(20%); }
-
 .letter-content { text-align: left; line-height: 2; font-size: 1.1rem; color: #222; white-space: pre-line; padding-bottom: 50px; }
-
 .btn-text { background: none; border: none; margin-top: 20px; font-family: var(--font-body); letter-spacing: 2px; text-transform: uppercase; font-size: 0.7rem; cursor: pointer; color: #555; transition: color 0.3s; }
 .btn-text:hover { color: black; }
-
-/* --- GALLERY --- */
 .gallery-wrapper { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 .polaroid-stack { position: relative; width: 280px; height: 400px; margin: 30px 0; perspective: 1000px; }
-
 .stack-item {
     position: absolute; width: 100%; height: 100%;
     background: #fff; padding: 15px; padding-bottom: 60px;
@@ -161,13 +128,10 @@ body {
     position: absolute; bottom: 20px; width: 100%; text-align: center;
     font-family: var(--font-script); font-size: 1.8rem; color: #333;
 }
-
 .stack-item.fly-away { transform: translate(80px, -40px) rotate(20deg); opacity: 0; pointer-events: none; }
-
 .gallery-nav { display: flex; align-items: center; gap: 20px; z-index: 20; }
 .nav-circle { width: 50px; height: 50px; border-radius: 50%; border: 1px solid #e0e0e0; background: transparent; cursor: pointer; transition: 0.3s; display: flex; justify-content: center; align-items: center; color: var(--text-muted); font-size: 1.2rem; }
 .nav-circle:hover { border-color: black; color: black; }
 #counter { font-family: var(--font-body); font-size: 0.8rem; letter-spacing: 2px; color: black; }
-
 .sound-control { position: absolute; top: 30px; right: 30px; z-index: 50; opacity: 1; cursor: pointer; transition: opacity 0.3s; }
 .sound-control:hover { opacity: 1; }
